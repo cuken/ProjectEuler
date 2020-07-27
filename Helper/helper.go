@@ -2,6 +2,7 @@ package helper
 
 import (
 	"log"
+	"math"
 	"time"
 )
 
@@ -18,4 +19,25 @@ func Fibonacci() func() int {
 		x, y = y, x+y
 		return x
 	}
+}
+
+// SieveofEratosthenes returns a []int slice that has a list of all primes up to (not including) n.
+func SieveofEratosthenes(n int) []int {
+	f := make([]bool, n)
+	var r []int
+
+	for i := 2; i <= int(math.Sqrt(float64(n))); i++ {
+		if f[i] == false {
+			for j := i * i; j < n; j += i {
+				f[j] = true
+			}
+		}
+	}
+	for i := 2; i < n; i++ {
+		if f[i] == false {
+			r = append(r, i)
+		}
+	}
+
+	return r
 }
