@@ -1,3 +1,3 @@
 # Solution
 
-![solution](Problems/P4/solution/problem4.png)
+![solution](problem4.png)

@@ -31,12 +31,12 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		rm := []byte(fmt.Sprintf(fmt.Sprintf("# Problem %v\n\n## %s\n\n```%s```\n\n### Thought Process\n\n", p, t, txt)))
+		rm := []byte(fmt.Sprintf(fmt.Sprintf("# Problem %v\n\n[Link to Problem](https://projecteuler.net/problem=%v)\n\n## %s\n\n```%s```\n\n### Thought Process\n\n", p, p, t, txt)))
 		err = ioutil.WriteFile(fmt.Sprintf("%s\\readme.md", d), rm, 0777)
 		if err != nil {
 			panic(err)
 		}
-		srm := []byte(fmt.Sprintf("# Solution\n\n![solution](Problems/P%v/solution/problem%v.png)", p, p))
+		srm := []byte(fmt.Sprintf("# Solution\n\n![solution](problem%v.png)", p))
 		err = ioutil.WriteFile(fmt.Sprintf("%s\\solution\\readme.md", d), srm, 0777)
 		if err != nil {
 			panic(err)
