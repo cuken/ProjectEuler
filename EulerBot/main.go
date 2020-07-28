@@ -36,7 +36,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		srm := []byte(fmt.Sprintf("# Solution\n\n![solution](Problems/P%v/solution/problem%v.png", p, p))
+		srm := []byte(fmt.Sprintf("# Solution\n\n![solution](Problems/P%v/solution/problem%v.png)", p, p))
 		err = ioutil.WriteFile(fmt.Sprintf("%s\\solution\\readme.md", d), srm, 0777)
 		if err != nil {
 			panic(err)
