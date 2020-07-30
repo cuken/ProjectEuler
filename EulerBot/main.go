@@ -11,18 +11,14 @@ import (
 )
 
 func main() {
-	prbPtr := flag.Int("problem", 10, "the problem you want to create")
+	prbPtr := flag.Int("p", 10, "retrieves the problem from ProjectEuler.net")
 
 	flag.Parse()
 
-	fmt.Printf("The problem you want to create is %v", *prbPtr)
-
-	// Check if the problem# folder exists in the directory;
 	p := *prbPtr
-
 	t, txt := visitWebsite(p)
 
-	d := fmt.Sprintf("C:\\Users\\colin\\Documents\\Coding\\ProjectEuler\\Problems\\P%v", p)
+	d := fmt.Sprintf("C:\\Users\\colin\\Documents\\Coding\\ProjectEuler\\Problems\\%04d", p)
 	if _, err := os.Stat(d); os.IsNotExist(err) {
 		os.MkdirAll(d, 0777)
 		os.MkdirAll(d+"\\solution", 0777)
