@@ -12,6 +12,100 @@ func TrackTime(start time.Time, name string) {
 	log.Printf("%s took %s to complete", name, elapsed)
 }
 
+func PrimeFactorization(n int) (pfs map[int]int) {
+	pfs = make(map[int]int)
+
+	// Get the number of 2s that divide n
+	for n%2 == 0 {
+		if _, ok := pfs[2]; ok {
+			pfs[2] += 1
+		} else {
+			pfs[2] = 1
+		}
+		n = n / 2
+	}
+
+	// n must be odd at this point. so we can skip one element
+	// (note i = i + 2)
+	for i := 3; i*i <= n; i = i + 2 {
+		// while i divides n, append i and divide n
+		for n%i == 0 {
+			if _, ok := pfs[i]; ok {
+				pfs[i] += 1
+			} else {
+				pfs[i] = 1
+			}
+			n = n / i
+		}
+	}
+
+	// This condition is to handle the case when n is a prime number
+	// greater than 2
+	if n > 2 {
+		pfs[n] = 1
+	}
+
+	return
+}
+
+// PrimeFactors returns an int slice of all prime factors for n
+func PrimeFactors(n int) (pfs []int) {
+	// Get the number of 2s that divide n
+	for n%2 == 0 {
+		pfs = append(pfs, 2)
+		n = n / 2
+	}
+
+	// n must be odd at this point. so we can skip one element
+	// (note i = i + 2)
+	for i := 3; i*i <= n; i = i + 2 {
+		// while i divides n, append i and divide n
+		for n%i == 0 {
+			pfs = append(pfs, i)
+			n = n / i
+		}
+	}
+
+	// This condition is to handle the case when n is a prime number
+	// greater than 2
+	if n > 2 {
+		pfs = append(pfs, n)
+	}
+
+	return
+}
+
+// NumberOfDivisors calculates the number of divisors of a given number
+func NumberOfDivisors(n int) int {
+	pfs := PrimeFactorization(n)
+
+	num := 1
+	for _, exponents := range pfs {
+		num *= (exponents + 1)
+	}
+
+	return num
+}
+
+// GetDivisors takes in a num and returns an int slice of all of its divisors and the count of divisors
+func GetDivisors(num int) (divisors []int, count int) {
+	t := math.Sqrt(float64(num))
+	it := int(math.Round(t))
+	is := []int{}
+
+	for i := 1; i <= it; i++ {
+		if it%i == 0 {
+			if it/i == i {
+				is = append(is, i)
+			} else {
+				is = append(is, i, it/i)
+			}
+		}
+	}
+
+	return is, len(is)
+}
+
 // Fibonacci all recurisve like
 func Fibonacci() func() int {
 	x, y := 1, 1
