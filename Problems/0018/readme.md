@@ -28,6 +28,9 @@ Find the maximum total from top to bottom of the triangle below:
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 <p class="note"><b>NOTE:</b> As there are only 16384 routes, it is possible to solve this problem by trying every route. However, <a href="problem=67">Problem 67</a>, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 ```
+![problem](problem.png)
 
 ### Thought Process
 
+We can do dynamic programming for this. If we start from the bottom and look at the max of the next two terms, we can make the right distinction and then progressively move our triangle up one row making the best picks as we move up.
+a + max(b,c)
