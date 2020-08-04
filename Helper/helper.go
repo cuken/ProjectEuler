@@ -75,6 +75,35 @@ func PrimeFactors(n int) (pfs []int) {
 	return
 }
 
+// SumOfPrimeFactors returns the sum of all primes up to n.
+func SumOfPrimeFactors(num int, plist []int) (sum int) {
+	n := num
+	sum = 1
+	p := plist[0]
+	i := 0
+	j := 0
+
+	for p*p <= n && n > 1 && i < len(plist) {
+		p = plist[i]
+		i++
+		if n%p == 0 {
+			j = p * p
+			n = n / p
+			for n%p == 0 {
+				j = j * p
+				n = n / p
+			}
+			sum = sum * (j - 1) / (p - 1)
+		}
+	}
+
+	if n > 1 {
+		sum *= n + 1
+	}
+
+	return sum - num
+}
+
 // NumberOfDivisors calculates the number of divisors of a given number
 func NumberOfDivisors(n int) int {
 	pfs := PrimeFactorization(n)
